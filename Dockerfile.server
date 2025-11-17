@@ -1,0 +1,73 @@
+# syntax=docker/dockerfile:1
+ARG PYTHON_VERSION=3.12
+
+################################ Overview
+# This Dockerfile builds a Label Studio server-only environment for development.
+# It follows the development setup instructions from README.md:
+# 1. Install poetry
+# 2. Run poetry install
+# 3. Run database migrations (at container startup)
+# 4. Run collectstatic (at container startup)
+# 5. Start the server with runserver
+
+FROM python:${PYTHON_VERSION}-slim
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    PIP_DEFAULT_TIMEOUT=100 \
+    POETRY_VIRTUALENVS_IN_PROJECT=false \
+    POETRY_NO_INTERACTION=1 \
+    LABEL_STUDIO_BASE_DATA_DIR=/label-studio/data \
+    DJANGO_SETTINGS_MODULE=core.settings.label_studio
+
+WORKDIR /label-studio
+
+# Install system dependencies required for building Python packages
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+        build-essential \
+        git \
+        curl \
+        ca-certificates \
+        libpq-dev && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install poetry using pip
+RUN pip install poetry
+
+# Copy all necessary files
+COPY pyproject.toml poetry.lock README.md ./
+COPY label_studio ./label_studio
+
+# Install all package dependencies using poetry
+RUN poetry install
+
+# Create data directory
+RUN mkdir -p ${LABEL_STUDIO_BASE_DATA_DIR}
+
+# Create entrypoint script
+RUN echo '#!/bin/bash\n\
+set -e\n\
+\n\
+# Run database migrations\n\
+echo "Running database migrations..."\n\
+poetry run python label_studio/manage.py migrate\n\
+\n\
+# Run collectstatic\n\
+echo "Collecting static files..."\n\
+poetry run python label_studio/manage.py collectstatic --no-input\n\
+\n\
+# Start the server\n\
+echo "Starting Label Studio server at http://0.0.0.0:8080"\n\
+exec poetry run python label_studio/manage.py runserver 0.0.0.0:8080\n\
+' > /entrypoint.sh && chmod +x /entrypoint.sh
+
+# Expose port 8080
+EXPOSE 8080
+
+# Start the server in development mode at http://localhost:8080
+ENTRYPOINT ["/entrypoint.sh"]
