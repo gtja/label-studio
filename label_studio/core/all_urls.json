@@ -18,12 +18,6 @@
         "decorators": ""
     },
     {
-        "url": "/favicon\\.ico",
-        "module": "django.views.generic.base.RedirectView",
-        "name": "",
-        "decorators": ""
-    },
-    {
         "url": "/label-studio-frontend/<path>",
         "module": "core.utils.static_serve.serve",
         "name": "",

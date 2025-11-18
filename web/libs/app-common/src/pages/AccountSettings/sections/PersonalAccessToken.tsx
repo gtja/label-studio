@@ -99,19 +99,7 @@ export const PersonalAccessToken = () => {
 export function PersonalAccessTokenDescription() {
   return (
     <Typography>
-      Authenticate with our API using your personal access token.
-      {!window.APP_SETTINGS?.whitelabel_is_active && (
-        <>
-          {" "}
-          See{" "}
-          <a href="https://labelstud.io/guide/api.html" target="_blank" rel="noreferrer" className="inline-flex gap-1">
-            Docs{" "}
-            <span>
-              <IconLaunch className="h-6 w-6" />
-            </span>
-          </a>
-        </>
-      )}
+     
     </Typography>
   );
 }

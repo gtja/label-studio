@@ -192,7 +192,7 @@ export const DataView = injector(
             <div className={cn("syncInProgress").toClassName()}>
               <h3 className={cn("syncInProgress").elem("title").toClassName()}>Nothing found</h3>
               <div className={cn("syncInProgress").elem("text").toClassName()}>
-                Try adjusting the filter or similarity search parameters
+                没有同步的记录可显示。请检查您的数据源设置。
               </div>
             </div>
           );
@@ -201,10 +201,10 @@ export const DataView = injector(
           return (
             <div className={cn("syncInProgress").toClassName()}>
               <h3 className={cn("syncInProgress").elem("title").toClassName()}>
-                Hang tight! Records are syncing in the background
+                请稍候！记录正在后台同步
               </h3>
               <div className={cn("syncInProgress").elem("text").toClassName()}>
-                Press the button below to see any synced records
+                按下方按钮查看已同步的记录
               </div>
               <Button
                 size="small"
@@ -217,7 +217,7 @@ export const DataView = injector(
                   await store.currentView?.reload();
                 }}
               >
-                Refresh
+                刷新
               </Button>
             </div>
           );
@@ -239,7 +239,6 @@ export const DataView = injector(
                 hasFilters={hasFilters}
                 canLabel={canLabel}
                 onLabelAllTasks={() => {
-                  // Use the same logic as the main Label All Tasks button
                   // Set localStorage to indicate "label all" mode (same as main button)
                   localStorage.setItem("dm:labelstream:mode", "all");
 

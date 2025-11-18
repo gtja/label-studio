@@ -11,7 +11,10 @@
 
 import { formDataToJPO, parseJson } from "../helpers";
 import statusCodes from "./status-codes.json";
-import { queryClient, shouldBypassCache } from "@humansignal/core/lib/utils/query-client";
+import {
+  queryClient,
+  shouldBypassCache,
+} from "@humansignal/core/lib/utils/query-client";
 
 /**
  * @typedef {Dict<string, EndpointConfig>} Endpoints
@@ -103,7 +106,9 @@ export class APIProxy {
       if (url[0] === "/") {
         gateway.pathname = url.replace(/([/])$/, "");
       } else {
-        gateway.pathname = `${gateway.pathname}/${url}`.replace(/([/]+)/g, "/").replace(/([/])$/, "");
+        gateway.pathname = `${gateway.pathname}/${url}`
+          .replace(/([/]+)/g, "/")
+          .replace(/([/])$/, "");
       }
 
       return gateway.toString();
@@ -140,7 +145,11 @@ export class APIProxy {
           value: this.createApiCallExecutor(restSettings, [parentPath], true),
         });
 
-        if (scope) this.resolveMethods(scope, [...(parentPath ?? []), restSettings.path]);
+        if (scope)
+          this.resolveMethods(scope, [
+            ...(parentPath ?? []),
+            restSettings.path,
+          ]);
       });
     }
   }
@@ -154,7 +163,10 @@ export class APIProxy {
     return async (urlParams, { headers, body, options } = {}) => {
       let responseResult;
       let responseMeta;
-      const alwaysExpectJSON = options?.alwaysExpectJSON === undefined ? true : options.alwaysExpectJSON;
+      const alwaysExpectJSON =
+        options?.alwaysExpectJSON === undefined
+          ? true
+          : options.alwaysExpectJSON;
 
       /**
        * Object to be used to control the cache for the request
@@ -183,16 +195,17 @@ export class APIProxy {
           methodSettings.path,
           paramsForRequest,
           parentPath,
-          methodSettings.gateway,
+          methodSettings.gateway
         );
 
-        const requestMethod = method ?? (methodSettings.method ?? "get").toUpperCase();
+        const requestMethod =
+          method ?? (methodSettings.method ?? "get").toUpperCase();
 
         const initialheaders = Object.assign(
           this.getDefaultHeaders(requestMethod),
           this.commonHeaders ?? {},
           methodSettings.headers ?? {},
-          headers ?? {},
+          headers ?? {}
         );
 
         const requestHeaders = new Headers(initialheaders);
@@ -241,9 +254,17 @@ export class APIProxy {
 
           /** @type {Response} */
           let rawResponse;
-
-          if (methodSettings.mock && process.env.NODE_ENV === "development" && !this.mockDisabled) {
-            rawResponse = await this.mockRequest(apiCallURL, urlParams, requestParams, methodSettings);
+          if (
+            methodSettings.mock &&
+            process.env.NODE_ENV === "development" &&
+            !this.mockDisabled
+          ) {
+            rawResponse = await this.mockRequest(
+              apiCallURL,
+              urlParams,
+              requestParams,
+              methodSettings
+            );
           } else {
             rawResponse = await fetch(apiCallURL, requestParams);
           }
@@ -262,11 +283,17 @@ export class APIProxy {
             try {
               const responseData =
                 rawResponse.status !== 204
-                  ? parseJson(this.alwaysExpectJSON && alwaysExpectJSON ? responseText : responseText || "{}")
+                  ? parseJson(
+                      this.alwaysExpectJSON && alwaysExpectJSON
+                        ? responseText
+                        : responseText || "{}"
+                    )
                   : { ok: true };
 
               if (methodSettings.convert instanceof Function) {
-                const convertedData = await methodSettings.convert(responseData);
+                const convertedData = await methodSettings.convert(
+                  responseData
+                );
 
                 return convertedData;
               }
@@ -288,16 +315,18 @@ export class APIProxy {
 
           return responseResult;
         };
-
         // Use TanStack Query cache for GET requests only if queryCacheParams is present
-        if (requestMethod === "GET" && queryCacheParams) {
-          const cacheKey = [queryCacheParams.keyPrefix, paramsForRequest];
-          return queryClient.fetchQuery({
-            queryKey: cacheKey,
-            queryFn: doFetch,
-            staleTime: shouldBypassCache ? undefined : queryCacheParams.staleTime,
-          });
-        }
+        // if (requestMethod === "GET" && queryCacheParams) {
+        //   console.info("开始请求-2", queryCacheParams, shouldBypassCache, paramsForRequest);
+        //   const cacheKey = [queryCacheParams.keyPrefix, paramsForRequest];
+        //   return queryClient.fetchQuery({
+        //     queryKey: cacheKey,
+        //     queryFn: doFetch,
+        //     staleTime: shouldBypassCache
+        //       ? undefined
+        //       : queryCacheParams.staleTime,
+        //   });
+        // }
         // Non-GET requests or no __useQueryCache: no cache
         return doFetch();
       } catch (exception) {
@@ -358,7 +387,10 @@ export class APIProxy {
     const url = new URL(gateway ? this.resolveGateway(gateway) : this.gateway);
     const usedKeys = [];
 
-    const { path: resolvedPath, method: resolvedMethod } = this.resolveEndpoint(endpoint, data);
+    const { path: resolvedPath, method: resolvedMethod } = this.resolveEndpoint(
+      endpoint,
+      data
+    );
 
     const path = []
       .concat(...(parentPath ?? []), resolvedPath)
@@ -520,7 +552,9 @@ export class APIProxy {
             return Promise.resolve(response);
           },
           text() {
-            return typeof response === "string" ? response : JSON.stringify(response);
+            return typeof response === "string"
+              ? response
+              : JSON.stringify(response);
           },
           headers: {},
           status: 200,

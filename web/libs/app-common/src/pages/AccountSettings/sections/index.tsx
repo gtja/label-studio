@@ -22,36 +22,36 @@ export const accountSettingsSections = (settings: AuthTokenSettings, permissions
 
   return [
     {
-      title: "Personal Info",
+      title: "个人信息",
       id: "personal-info",
       component: PersonalInfo,
     },
     {
       title: (
         <div className="flex items-center gap-tight">
-          <span>Hotkeys</span>
+          <span>快捷键</span>
           <Badge variant="beta">Beta</Badge>
         </div>
       ),
       id: "hotkeys",
       component: HotkeysManager,
       description: () =>
-        "Customize your keyboard shortcuts to speed up your workflow. Click on any hotkey below to assign a new key combination that works best for you.",
+        "管理您的快捷键以提高工作效率。您可以自定义、导入或导出快捷键设置。",
     },
     {
-      title: "Email Preferences",
+      title: "邮箱偏好",
       id: "email-preferences",
       component: EmailPreferences,
     },
     {
-      title: "Membership Info",
+      title: "成员信息",
       id: "membership-info",
       component: MembershipInfo,
     },
     settings.api_tokens_enabled &&
       canCreateTokens &&
       ff.isActive(ff.FF_AUTH_TOKENS) && {
-        title: "Personal Access Token",
+        title: "个人访问令牌",
         id: "personal-access-token",
         component: PersonalJWTToken,
         description: PersonalAccessTokenDescription,

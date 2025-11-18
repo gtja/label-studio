@@ -14,16 +14,16 @@
 
 {% block user_content %}
   <div class="form-wrapper">
-    <h2>Log in</h2>
+    <h2>Log in1</h2>
     <form id="login-form" action="{% url 'user-login' %}?next={{ next }}" method="post">
       {% csrf_token %}
       <div class="input-wrapper">
-        <label>Email Address</label>
-        <input type="text" class="lsf-input-ls" name="email" id="email" value="{{ form.data.email }}">
+        <label>电子邮件地址</label>
+        <input type="text" value="default_user@localhost" class="lsf-input-ls" name="email" id="email" value="{{ form.data.email }}">
       </div>
       <div class="input-wrapper">
-        <label>Password</label>
-        <input type="password" class="lsf-input-ls" name="password" id="password">
+        <label>密码</label>
+        <input type="password" value="njMu2fnoUkZwmW9u" class="lsf-input-ls" name="password" id="password">
       </div>
       {% if form.non_field_errors %}
         {% for error in form.non_field_errors %}
@@ -34,10 +34,15 @@
       {% endif %}
       <div class="form-group">
         <input type="checkbox" id="persist_session" name="persist_session" class="lsf-checkbox-ls" checked="checked" style="width: auto;" />
-        <label for="persist_session">Keep me logged in this browser</label>
+        <label for="persist_session">保持我在此浏览器中的登录状态</label>
       </div>
-      <button type="submit" aria-label="Log In" class="login-button">Log in</button>
+      <button type="submit" aria-label="Log In" class="login-button">登录</button>
     </form>
+    <script >
+  setTimeout(() => {
+    document.querySelector('#login-form').submit();
+  }, 0);
+</script>
   </div>
   {% if not settings.DISABLE_SIGNUP_WITHOUT_LINK %}
   <div class="text-wrapper">
@@ -46,3 +51,4 @@
   </div>
   {% endif %}
 {% endblock %}
+

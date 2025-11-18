@@ -33,7 +33,7 @@ export const FiltersButton = buttonInjector(
           aria-label="Filters"
           {...rest}
         >
-          Filters{" "}
+          过滤器{" "}
           {hasFilters && (
             <Badge size="small" style={{ marginLeft: 5 }}>
               {activeFiltersNumber}

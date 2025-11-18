@@ -195,8 +195,6 @@ const DocumentationLink = () => {
  * - project: object — Project object with assignment settings - optional
  * - hasData: boolean — Whether the project has any tasks - optional
  * - hasFilters: boolean — Whether filters are currently applied - optional
- * - canLabel: boolean — Whether the Label All Tasks button would be enabled - optional
- * - onLabelAllTasks: function — Callback for Label All Tasks action - optional
  * - onClearFilters: function — Callback to clear all applied filters - optional
  */
 
@@ -253,8 +251,8 @@ export const EmptyState: FC<EmptyStateProps> = ({
       if (isAutoDistribution) {
         return renderEmptyStateLayout({
           icon: <IconLsLabeling />,
-          title: "Start labeling tasks",
-          description: "Tasks you've labeled will appear here",
+          title: "开始标注任务",
+          description: "您标注的任务将显示在这里",
           actions: (
             <Button
               variant="primary"
@@ -263,7 +261,7 @@ export const EmptyState: FC<EmptyStateProps> = ({
               onClick={onLabelAllTasks}
               data-testid="dm-label-all-tasks-button"
             >
-              Label All Tasks
+              标注所有任务
             </Button>
           ),
         });
@@ -289,8 +287,8 @@ export const EmptyState: FC<EmptyStateProps> = ({
   // Default case: show import functionality (existing behavior for Owners/Admins/Managers)
   return renderEmptyStateLayout({
     icon: <IconUpload />,
-    title: "Import data to get your project started",
-    description: "Connect your cloud storage or upload files from your computer",
+    title: "导入数据以启动您的项目",
+    description: "连接您的云存储或从计算机上传文件",
     testId: "empty-state-label",
     ariaLabelledBy: "dm-empty-title",
     ariaDescribedBy: "dm-empty-desc",
@@ -305,7 +303,7 @@ export const EmptyState: FC<EmptyStateProps> = ({
             onClick={onOpenSourceStorageModal}
             data-testid="dm-connect-source-storage-button"
           >
-            Connect Cloud Storage
+            连接云存储
           </Button>
         )}
 
@@ -317,7 +315,7 @@ export const EmptyState: FC<EmptyStateProps> = ({
             onClick={onOpenImportModal}
             data-testid="dm-import-button"
           >
-            Import
+            导入
           </Button>
         )}
       </>

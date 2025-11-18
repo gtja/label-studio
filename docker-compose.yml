@@ -1,7 +1,7 @@
 services:
   nginx:
     build: .
-    image: heartexlabs/label-studio:latest
+    image: registry.jingan.com:32008/ja/ja-label-studio:v1.0.6
     restart: unless-stopped
     ports:
       - "8080:8085"
@@ -28,7 +28,7 @@ services:
     stdin_open: true
     tty: true
     build: .
-    image: heartexlabs/label-studio:latest
+    image: registry.jingan.com:32008/ja/ja-label-studio:v1.0.6
     restart: unless-stopped
     expose:
       - "8000"
@@ -52,7 +52,7 @@ services:
     command: label-studio-uwsgi
 
   db:
-    image: pgautoupgrade/pgautoupgrade:13-alpine
+    image: registry.jingan.com:32008/ja/pgautoupgrade/pgautoupgrade:13-alpine
     hostname: db
     restart: unless-stopped
     # Optional: Enable TLS on PostgreSQL

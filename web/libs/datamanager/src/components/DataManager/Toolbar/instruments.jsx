@@ -84,7 +84,7 @@ export const instruments = {
       <FieldsButton
         wrapper={FieldsButton.Checkbox}
         trailingIcon={<Icon {...iconProps} />}
-        title={"Columns"}
+        title={"字段"}
         size={size}
         style={style}
         openUpwardForShortViewport={false}

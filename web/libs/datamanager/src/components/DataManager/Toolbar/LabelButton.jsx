@@ -92,13 +92,13 @@ export const LabelButton = injector(({ store, canLabel, size, target, selectedCo
             style={primaryStyle}
             onClick={onLabelAll}
           >
-            Label {selectedCount ? selectedCount : "All"} Task{!selectedCount || selectedCount > 1 ? "s" : ""}
+            标注 {selectedCount ? selectedCount : "所有"} 任务
           </Button>
           <Dropdown.Trigger
             align="bottom-right"
             content={
               <Menu size="compact">
-                <Menu.Item onClick={onLabelVisible}>Label Tasks As Displayed</Menu.Item>
+                <Menu.Item onClick={onLabelVisible}>标注显示的任务</Menu.Item>
               </Menu>
             }
           >

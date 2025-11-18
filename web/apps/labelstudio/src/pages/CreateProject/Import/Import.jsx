@@ -382,12 +382,12 @@ export const ImportPage = ({
           method="POST"
           onSubmit={onLoadURL}
         >
-          <Input placeholder="Dataset URL" name="url" ref={urlRef} rawClassName="h-[40px]" />
+          <Input placeholder="数据集 URL" name="url" ref={urlRef} rawClassName="h-[40px]" />
           <Button variant="primary" look="outlined" type="submit" aria-label="Add URL">
-            Add URL
+            添加 URL
           </Button>
         </form>
-        <span>or</span>
+        <span>或</span>
         <Button
           variant="primary"
           look="outlined"
@@ -396,7 +396,7 @@ export const ImportPage = ({
           leading={<IconUpload />}
           aria-label="Upload file"
         >
-          Upload {files.uploaded.length ? "More " : ""}Files
+          上传 {files.uploaded.length ? "更多 " : ""}文件
         </Button>
         {ff.isActive(ff.FF_SAMPLE_DATASETS) && (
           <SampleDatasetSelect samples={samples} sample={sample} onSampleApplied={onSampleDatasetSelect} />
@@ -404,16 +404,16 @@ export const ImportPage = ({
         <div
           className={importClass.elem("csv-handling").mod({ highlighted: highlightCsvHandling, hidden: !csvHandling })}
         >
-          <span>Treat CSV/TSV as</span>
+          <span>将 CSV/TSV 视为</span>
           <label>
-            <input {...csvProps} value="tasks" checked={csvHandling === "tasks"} /> List of tasks
+            <input {...csvProps} value="tasks" checked={csvHandling === "tasks"} /> 任务列表
           </label>
           <label>
-            <input {...csvProps} value="ts" checked={csvHandling === "ts"} /> Time Series or Whole Text File
+            <input {...csvProps} value="ts" checked={csvHandling === "ts"} /> 时间序列或完整文本文件
           </label>
         </div>
         <div className={importClass.elem("status")}>
-          {files.uploaded.length ? `${files.uploaded.length} files uploaded` : ""}
+          {files.uploaded.length ? `${files.uploaded.length} 个文件已上传` : ""}
         </div>
       </header>
 
@@ -432,19 +432,17 @@ export const ImportPage = ({
                   <div className={`${dropzoneClass.elem("content")} w-full`}>
                     <IconFileUpload height="64" className={dropzoneClass.elem("icon")} />
                     <header>
-                      Drag & drop files here
-                      <br />
-                      or click to browse
+                      拖放文件到此处或点击浏览文件
                     </header>
 
                     <dl>
-                      <dt>Images</dt>
+                      <dt>图片</dt>
                       <dd>{supportedExtensions.image.join(", ")}</dd>
-                      <dt>Audio</dt>
+                      <dt>音频</dt>
                       <dd>{supportedExtensions.audio.join(", ")}</dd>
                       <dt>
                         <div className="flex items-center gap-1">
-                          Video
+                          视频
                           <Tooltip title="Video format support depends on your browser. Click to learn more.">
                             <a
                               href="https://labelstud.io/tags/video#Video-format"
@@ -459,11 +457,11 @@ export const ImportPage = ({
                         </div>
                       </dt>
                       <dd>{supportedExtensions.video.join(", ")}</dd>
-                      <dt>HTML / HyperText</dt>
+                      <dt>HTML / 超文本</dt>
                       <dd>{supportedExtensions.html.join(", ")}</dd>
-                      <dt>Text</dt>
+                      <dt>文本</dt>
                       <dd>{supportedExtensions.text.join(", ")}</dd>
-                      <dt>Structured data</dt>
+                      <dt>结构化数据</dt>
                       <dd>{supportedExtensions.structuredData.join(", ")}</dd>
                       <dt>PDF</dt>
                       <dd>{supportedExtensions.pdf.join(", ")}</dd>

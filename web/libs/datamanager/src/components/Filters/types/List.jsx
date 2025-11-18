@@ -34,7 +34,7 @@ export const VariantSelect = observer(({ filter, schema, onChange, multiple, val
       }
       searchFilter={filter.cellView?.searchFilter}
       onChange={(value) => onChange(value)}
-      placeholder={placeholder ?? "Select value"}
+      placeholder={placeholder ?? "选择..."}
       disabled={disabled}
     />
   );

@@ -182,10 +182,10 @@ export const Table = observer(
           <FieldsButton
             className={cn("table-toolbar").elem("customize-button").toString()}
             wrapper={FieldsButton.Checkbox}
-            title={"Columns"}
+            title={"字段"}
             size="small"
             trailingIcon={<Icon icon={IconChevronDown} />}
-            tooltip={"Customize Columns"}
+            tooltip={"自定义字段"}
             data-testid="columns-picker-quickview"
           />
           <DensityToggle size="small" onChange={onDensityChange} data-testid="density-toggle-quickview" />

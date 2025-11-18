@@ -15,12 +15,12 @@ export const MenuLayout = ({ children, ...routeProps }) => {
       menuItems={[
         GeneralSettings,
         LabelingSettings,
-        AnnotationSettings,
-        MachineLearningSettings,
-        PredictionsSettings,
-        StorageSettings,
-        WebhookPage,
-        DangerZone,
+        // AnnotationSettings,
+        // MachineLearningSettings,
+        // PredictionsSettings,
+        // StorageSettings,
+        // WebhookPage,
+        // DangerZone,
       ].filter(Boolean)}
       path={routeProps.match.url}
       children={children}
@@ -39,7 +39,7 @@ const pages = {
 };
 
 export const SettingsPage = {
-  title: "Settings",
+  title: "设置",
   path: "/settings",
   exact: true,
   layout: MenuLayout,

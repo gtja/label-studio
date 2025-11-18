@@ -64,7 +64,7 @@ export const Filters = injector(({ views, currentView, filters }) => {
             />
           ))
         ) : (
-          <div className={cn("filters").elem("empty").toClassName()}>No filters applied</div>
+          <div className={cn("filters").elem("empty").toClassName()}>没有应用过滤器</div>
         )}
       </div>
       <div className={cn("filters").elem("actions").toClassName()}>
@@ -74,7 +74,7 @@ export const Filters = injector(({ views, currentView, filters }) => {
           onClick={() => currentView.createFilter()}
           leading={<IconPlus className="!h-3 !w-3" />}
         >
-          Add {filters.length ? "Another Filter" : "Filter"}
+          添加 {filters.length ? "另一个过滤器" : "过滤器"}
         </Button>
 
         {!sidebarEnabled ? (
@@ -82,7 +82,7 @@ export const Filters = injector(({ views, currentView, filters }) => {
             look="string"
             type="link"
             size="small"
-            tooltip="Pin to sidebar"
+            tooltip="固定到侧边栏"
             onClick={() => views.expandFilters()}
             aria-label="Pin filters to sidebar"
           >

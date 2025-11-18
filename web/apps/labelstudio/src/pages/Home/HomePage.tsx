@@ -12,37 +12,14 @@ import type { Page } from "../types/Page";
 
 const PROJECTS_TO_SHOW = 10;
 
-const resources = [
-  {
-    title: "Documentation",
-    url: "https://labelstud.io/guide/",
-  },
-  {
-    title: "API Documentation",
-    url: "https://api.labelstud.io/api-reference/introduction/getting-started",
-  },
-  {
-    title: "Release Notes",
-    url: "https://labelstud.io/learn/categories/release-notes/",
-  },
-  {
-    title: "LabelStud.io Blog",
-    url: "https://labelstud.io/blog/",
-  },
-  {
-    title: "Slack Community",
-    url: "https://slack.labelstud.io",
-  },
-];
-
 const actions = [
   {
-    title: "Create Project",
+    title: "创建项目",
     icon: IconFolderAdd,
     type: "createProject",
   },
   {
-    title: "Invite Members",
+    title: "邀请成员",
     icon: IconUserAdd,
     type: "inviteMembers",
   },
@@ -55,7 +32,7 @@ export const HomePage: Page = () => {
   const [creationDialogOpen, setCreationDialogOpen] = useState(false);
   const [invitationOpen, setInvitationOpen] = useState(false);
 
-  useUpdatePageTitle("Home");
+  useUpdatePageTitle("首页");
   const { data, isFetching, isSuccess, isError } = useQuery({
     queryKey: ["projects", { page_size: 10 }],
     async queryFn() {
@@ -83,12 +60,12 @@ export const HomePage: Page = () => {
       <div className="grid grid-cols-[minmax(0,1fr)_450px] gap-6">
         <section className="flex flex-col gap-6">
           <div className="flex flex-col gap-1">
-            <Typography variant="headline" size="small">
+            {/* <Typography variant="headline" size="small">
               Welcome 👋
             </Typography>
             <Typography size="small" className="text-neutral-content-subtler">
               Let's get you started.
-            </Typography>
+            </Typography> */}
           </div>
           <div className="flex justify-start gap-4">
             {actions.map((action) => {
@@ -111,9 +88,9 @@ export const HomePage: Page = () => {
             title={
               data && data?.count > 0 ? (
                 <>
-                  Recent Projects{" "}
+                  最近的项目{" "}
                   <a href="/projects" className="text-lg font-normal hover:underline">
-                    View All
+                    查看全部 <IconExternal className="inline-block w-4 h-4 mb-1" />
                   </a>
                 </>
               ) : null
@@ -134,14 +111,8 @@ export const HomePage: Page = () => {
                 >
                   <IconFolderOpen />
                 </div>
-                <Typography variant="headline" size="small">
-                  Create your first project
-                </Typography>
-                <Typography size="small" className="text-neutral-content-subtler">
-                  Import your data and set up the labeling interface to start annotating
-                </Typography>
                 <Button className="mt-4" onClick={() => setCreationDialogOpen(true)} aria-label="Create new project">
-                  Create Project
+                  创建项目
                 </Button>
               </div>
             ) : isSuccess && data && data.results.length > 0 ? (
@@ -167,7 +138,7 @@ export const HomePage: Page = () => {
   );
 };
 
-HomePage.title = "Home";
+HomePage.title = "首页";
 HomePage.path = "/";
 HomePage.exact = true;
 

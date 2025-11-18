@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <meta name="author" content="Label Studio"/>
+  <meta name="author" content="算法标注"/>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=0.9, shrink-to-fit=no">
 
@@ -48,25 +48,16 @@
   {% block app-scripts %}
   {% endblock %}
 
-  {% if settings.FRONTEND_SENTRY_DSN %}
-    <!-- Sentry -->
-    <script
-    src="https://browser.sentry-cdn.com/5.17.0/bundle.min.js"
-    integrity="sha384-lowBFC6YTkvMIWPORr7+TERnCkZdo5ab00oH5NkFLeQUAmBTLGwJpFjF6djuxJ/5"
-    crossorigin="anonymous"></script>
-  {% endif %}
-
   <script nonce="{{request.csp_nonce}}">
     window.exports = () => {};
   </script>
 
   {% block page_labeling %}
-    <title>Label Studio</title>
-    <link href="{{settings.HOSTNAME}}{% static 'images/favicon.ico' %}" rel="shortcut icon"/>
+    <title>算法标注</title>
   {% endblock %}
 
-  {% block head %}
-  {% endblock %}
+  <!-- {% block head %}
+  {% endblock %} -->
 
   {% get_current_language as LANGUAGE_CODE %}
   {% get_available_languages as LANGUAGES %}
@@ -178,9 +169,6 @@
     polling: {% if feature_flags.fflag_dev_disable_polling_killswitch_short %}false{% else %}true{% endif %},
     hostname: "{{settings.HOSTNAME}}",
     version: {{ versions|json_dumps_ensure_ascii|safe }},
-    sentry_dsn: {% if settings.FRONTEND_SENTRY_DSN %}"{{ settings.FRONTEND_SENTRY_DSN }}"{% else %}null{% endif %},
-    sentry_rate: "{{ settings.FRONTEND_SENTRY_RATE }}",
-    sentry_environment: "{{ settings.FRONTEND_SENTRY_ENVIRONMENT }}",
     editor_keymap: mergedEditorKeymap,
     feature_flags: {{ feature_flags|json_dumps_ensure_ascii|safe }},
     feature_flags_default_value: {{ settings.FEATURE_FLAGS_DEFAULT_VALUE|json_dumps_ensure_ascii|safe }},
@@ -193,7 +181,7 @@
     },
 
     {% block app_more_settings %}
-      page_title: "Label Studio",
+      page_title: "算法标注",
       flags: {
         allow_organization_webhooks: {{settings.ALLOW_ORGANIZATION_WEBHOOKS|yesno:"true,false"}},
         storage_persistence: {{ settings.STORAGE_PERSISTENCE|yesno:"true,false" }}, 

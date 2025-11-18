@@ -474,19 +474,14 @@ const Configurator = ({
 
   const extra = (
     <p className={configClass.elem("tags-link")}>
-      Configure the labeling interface with tags.
-      <br />
-      <a href="https://labelstud.io/tags/" target="_blank" rel="noreferrer">
-        See all available tags
-      </a>
-      .
+     
     </p>
   );
 
   return (
     <div className={configClass}>
       <div className={configClass.elem("container")}>
-        <h1>Labeling Interface{hasChanges ? " *" : ""}</h1>
+        <h1>标注设置{hasChanges ? " *" : ""}</h1>
         <header>
           <Button
             type="button"
@@ -496,9 +491,9 @@ const Configurator = ({
             look="outlined"
             aria-label="Browse templates"
           >
-            Browse Templates
+            浏览模板
           </Button>
-          <ToggleItems items={{ code: "Code", visual: "Visual" }} active={configure} onSelect={onSelect} />
+          <ToggleItems items={{ code: "代码", visual: "可视化" }} active={configure} onSelect={onSelect} />
         </header>
         <div className={configClass.elem("editor")}>
           {configure === "code" && (
@@ -561,7 +556,7 @@ const Configurator = ({
               waiting={waiting}
               aria-label="Save configuration"
             >
-              {waiting ? "Saving..." : "Save"}
+              {waiting ? "保存中..." : "保存"}
             </Button>
             {isFF(FF_UNSAVED_CHANGES) && <UnsavedChanges hasChanges={hasChanges} onSave={onSave} />}
           </Form.Actions>

@@ -166,7 +166,8 @@ export const Menubar = ({
               className={`${menubarClass.elem("trigger")} main-menu-trigger p-2`}
             >
               {/* <LSLogo className={`${menubarClass.elem("logo")}`} alt="Label Studio Logo" /> */}
-              <img src={logo} className="h-full" />
+              {/* <img src={logo} className="h-full" /> */}
+              <span className='text-lg'>算法标注</span>
               <Hamburger opened={sidebarOpened} />
             </div>
           </Dropdown.Trigger>
@@ -201,7 +202,7 @@ export const Menubar = ({
             </div>
           </div>
 
-          {ff.isActive(ff.FF_THEME_TOGGLE) && <ThemeToggle />}
+          {/* {ff.isActive(ff.FF_THEME_TOGGLE) && <ThemeToggle />} */}
 
           <Dropdown.Trigger
             ref={useMenuRef}
@@ -210,39 +211,25 @@ export const Menubar = ({
               <Menu>
                 <Menu.Item
                   icon={<IconPersonInCircle />}
-                  label="Account &amp; Settings"
+                  label="账号和设置"
                   href={pages.AccountSettingsPage.path}
                 />
                 {/* <Menu.Item label="Dark Mode"/> */}
                 <Menu.Item
                   icon={<IconDoor />}
-                  label="Log Out"
+                  label="退出登录"
                   href={absoluteURL("/logout")}
                   data-external
                 />
-                {showNewsletterDot && (
-                  <>
-                    <Menu.Divider />
-                    <Menu.Item
-                      className={cn("newsletter-menu-item")}
-                      href={pages.AccountSettingsPage.path}
-                    >
-                      <span>
-                        Please check new notification settings in the Account &
-                        Settings page
-                      </span>
-                      <span className={cn("newsletter-menu-badge")} />
-                    </Menu.Item>
-                  </>
-                )}
+         
               </Menu>
             }
           >
             <div title={user?.email} className={menubarClass.elem("user")}>
               <Userpic user={user} isInProgress={isLoading} />
-              {showNewsletterDot && (
+              {/* {showNewsletterDot && (
                 <div className={menubarClass.elem("userpic-badge")} />
-              )}
+              )} */}
             </div>
           </Dropdown.Trigger>
         </div>
@@ -267,7 +254,7 @@ export const Menubar = ({
               <Menu>
                 {isFF(FF_HOMEPAGE) && (
                   <Menu.Item
-                    label="Home"
+                    label="首页"
                     to="/"
                     icon={<IconHome />}
                     data-external
@@ -275,19 +262,19 @@ export const Menubar = ({
                   />
                 )}
                 <Menu.Item
-                  label="Projects"
+                  label="项目"
                   to="/projects"
                   icon={<IconFolder />}
                   data-external
                   exact
                 />
-                <Menu.Item
-                  label="Organization"
+                {/* <Menu.Item
+                  label="组织"
                   to="/organization"
                   icon={<IconPeople />}
                   data-external
                   exact
-                />
+                /> */}
 
                 <Menu.Spacer />
 
@@ -304,7 +291,7 @@ export const Menubar = ({
                   onClick={sidebarPin}
                   active={sidebarPinned}
                 >
-                  {sidebarPinned ? "Unpin menu" : "Pin menu"}
+                  {sidebarPinned ? "取消固定菜单" : "固定菜单"}
                 </Menu.Item>
               </Menu>
             </Dropdown>

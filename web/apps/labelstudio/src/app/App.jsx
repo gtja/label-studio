@@ -4,7 +4,6 @@ import { createBrowserHistory } from "history";
 import { render } from "react-dom";
 import { Router } from "react-router-dom";
 import { LEAVE_BLOCKER_KEY, leaveBlockerCallback } from "../components/LeaveBlocker/LeaveBlocker";
-import { initSentry } from "../config/Sentry";
 import { ApiProvider, useAPI } from "../providers/ApiProvider";
 import { AppStoreProvider } from "../providers/AppStoreProvider";
 import { ConfigProvider } from "../providers/ConfigProvider";
@@ -25,6 +24,7 @@ import { ff } from "@humansignal/core";
 import "@humansignal/ui/src/tailwind.css";
 import "./App.scss";
 import { AuthProvider } from "@humansignal/core/providers/AuthProvider";
+import useFavicon from './useFavicon';
 
 const baseURL = new URL(APP_SETTINGS.hostname || location.origin);
 export const UNBLOCK_HISTORY_MESSAGE = "UNBLOCK_HISTORY";
@@ -54,9 +54,8 @@ const browserHistory = createBrowserHistory({
 
 window.LSH = browserHistory;
 
-initSentry(browserHistory);
-
 const App = ({ content }) => {
+  useFavicon('');
   return (
     <ErrorBoundary>
       <Router history={browserHistory}>

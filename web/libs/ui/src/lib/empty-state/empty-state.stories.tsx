@@ -327,7 +327,7 @@ export const AnnotatorLabelingState: Story = {
     description: "Begin labeling to track your progress here",
     actions: (
       <Button variant="primary" look="filled">
-        Label All Tasks
+        Label All Task
       </Button>
     ),
   },
