@@ -4,8 +4,8 @@ services:
     image: registry.jingan.com:32008/ja/ja-label-studio:v1.0.6
     restart: unless-stopped
     ports:
-      - "8080:8085"
-      - "8081:8086"
+      - "32780:32780"
+      - "32781:32781"
     depends_on:
       - app
     environment:
@@ -52,7 +52,7 @@ services:
     command: label-studio-uwsgi
 
   db:
-    image: registry.jingan.com:32008/ja/pgautoupgrade/pgautoupgrade:13-alpine
+    image: registry.jingan.com:32008/ja/pgautoupgrade/pgautoupgrade:13-alpine-amd
     hostname: db
     restart: unless-stopped
     # Optional: Enable TLS on PostgreSQL

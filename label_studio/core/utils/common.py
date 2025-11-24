@@ -402,9 +402,9 @@ def check_for_the_latest_version(print_message):
         return
     label_studio.__latest_version_check_time__ = current_time
 
-    data = get_latest_version()
-    if not data:
-        return
+    # data = get_latest_version()
+    # if not data:
+    #     return
     latest_version = data['latest_version']
     outdated = latest_version and current_version_is_outdated(latest_version)
 
@@ -427,8 +427,8 @@ def check_for_the_latest_version(print_message):
 
 # check version ASAP while package loading
 # skip notification for uwsgi, as we're running in production ready mode
-if settings.APP_WEBSERVER != 'uwsgi':
-    check_for_the_latest_version(print_message=True)
+# if settings.APP_WEBSERVER != 'uwsgi':
+#     check_for_the_latest_version(print_message=True)
 
 
 def collect_versions(force=False):
@@ -440,7 +440,7 @@ def collect_versions(force=False):
 
     # prevent excess checks by time intervals
     current_time = time.time()
-    need_check = current_time - settings.VERSIONS_CHECK_TIME > 300
+    need_check = False
     settings.VERSIONS_CHECK_TIME = current_time
 
     if settings.VERSIONS and not force and not need_check:
@@ -498,16 +498,16 @@ def collect_versions(force=False):
         if 'message' in result[key] and len(result[key]['message']) > 70:
             result[key]['message'] = result[key]['message'][0:70] + ' ...'
 
-    if settings.SENTRY_DSN:
-        import sentry_sdk
+    # if settings.SENTRY_DSN:
+    #     import sentry_sdk
 
-        sentry_sdk.set_context('versions', copy.deepcopy(result))
+    #     sentry_sdk.set_context('versions', copy.deepcopy(result))
 
-        for package in result:
-            if 'version' in result[package]:
-                sentry_sdk.set_tag('version-' + package, result[package]['version'])
-            if 'commit' in result[package]:
-                sentry_sdk.set_tag('commit-' + package, result[package]['commit'])
+    #     for package in result:
+    #         if 'version' in result[package]:
+    #             sentry_sdk.set_tag('version-' + package, result[package]['version'])
+    #         if 'commit' in result[package]:
+    #             sentry_sdk.set_tag('commit-' + package, result[package]['commit'])
 
     # edition type
     result['edition'] = settings.VERSION_EDITION

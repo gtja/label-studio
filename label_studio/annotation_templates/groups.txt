@@ -1,4 +1,4 @@
-Computer Vision1
+Computer Vision
 Natural Language Processing
 Audio/Speech Processing
 Conversational AI

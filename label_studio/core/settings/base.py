@@ -841,7 +841,7 @@ if ENABLE_CSP := get_bool_env('ENABLE_CSP', True):
     # Note that this will be overridden to real CSP for views that use the override_report_only_csp decorator
     CSP_REPORT_ONLY = get_bool_env('LS_CSP_REPORT_ONLY', True)
     CSP_REPORT_URI = get_env('LS_CSP_REPORT_URI', None)
-    CSP_INCLUDE_NONCE_IN = ['script-src', 'default-src']
+    # CSP_INCLUDE_NONCE_IN = ['script-src', 'default-src']
 
     MIDDLEWARE.append('core.middleware.HumanSignalCspMiddleware')
 

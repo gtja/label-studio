@@ -15,7 +15,7 @@ ARG BRANCH_OVERRIDE
 # 5. "prod" - Creates the final production image with the Label Studio, Nginx, and other dependencies.
 
 ################################ Stage: frontend-builder (build frontend assets)
-FROM registry.jingan.com:32008/ja/node:22-trixie-amd AS frontend-builder
+FROM registry.jingan.com:32008/ja/node:22-trixie-arm AS frontend-builder
 ENV BUILD_NO_SERVER=true \
     BUILD_NO_HASH=true \
     BUILD_NO_CHUNKS=true \
@@ -51,7 +51,7 @@ RUN --mount=type=cache,target=/root/web/.yarn,id=yarn-cache,sharing=locked \
     yarn version:libs
 
 ################################ Stage: venv-builder (prepare the virtualenv)
-FROM registry.jingan.com:32008/ja/python:3.13-slim-trixie-amd AS venv-builder
+FROM registry.jingan.com:32008/ja/python:3.13-slim-trixie-arm AS venv-builder
 ARG POETRY_VERSION
 
 ENV PYTHONUNBUFFERED=1 \
@@ -116,7 +116,7 @@ RUN --mount=type=bind,source=.git,target=./.git \
     VERSION_OVERRIDE=${VERSION_OVERRIDE} BRANCH_OVERRIDE=${BRANCH_OVERRIDE} poetry run python label_studio/core/version.py
 
 ################################### Stage: prod
-FROM registry.jingan.com:32008/ja/python:3.13-slim-trixie-amd AS production
+FROM registry.jingan.com:32008/ja/python:3.13-slim-trixie-arm AS production
 
 ENV LS_DIR=/label-studio \
     HOME=/label-studio \
